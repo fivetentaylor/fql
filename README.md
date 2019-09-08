@@ -43,11 +43,25 @@ f(Record, *args) -> Collection
 f(Record, *args) -> Atom
 ```
 
-These signatures allow for a system capable of expressing any possible transformation of data we'd care to imagine.
+These signatures allow for a system capable of expressing any possible transformation of data we'd care to imagine
 
-FQL is intended to be infinitely extensible making it easy to create any new 
+FQL is intended to be infinitely extensible making it easy to create any new function matching one of the above signatures
 
+```
+f(*Collections, *args) -> Collection
 
-group, ungroup, map, paste, union,
+join, paste, union
+```
 
-min, max, avg,
+```
+f(Collection, *args) -> Collection
+
+group, ungroup, map, filter
+```
+
+```
+f(Collection, *args) -> Record
+
+min, max, avg
+```
+
