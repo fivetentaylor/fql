@@ -1,6 +1,4 @@
-# FQL
-
-Functional Query Language
+# Functional Query Language
 
 A common set of functions for writing composable and reusable queries of data within any language
 
