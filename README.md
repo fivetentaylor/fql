@@ -15,6 +15,13 @@ and targeting any backend
 - sqlite
 - in memory hashes and lists
 - hive
+- etc...
+
+## Queries
+
+FQL evaluates lazily. You build up your queries and then `collect` when you're ready to pull back results.
+
+Intermediate queries can be saved to variables and composed. Depending on the target backend the compiler can make lots of optimizations to reuse intermediate results and boost performance over hand tuned SQL or other logic.
 
 ## Data Interfaces
 
@@ -48,13 +55,16 @@ FQL is intended to be infinitely extensible making it easy to create any new fun
 ```
 f(*Collections, *args) -> Collection
 
-join, paste, union
+join, zip, union
 ```
 
 ```
 f(Collection, *args) -> Collection
 
-group, ungroup, map, filter
+group, ungroup, filter, sort
+
+group(collection, 'col1')
+map(collection, )
 ```
 
 ```
@@ -62,4 +72,63 @@ f(Collection, *args) -> Record
 
 min, max, avg
 ```
+
+```
+f(Record, *args) -> Collection
+```
+
+```
+f(Record, *args) -> Atom
+
+get
+```
+
+```
+[
+  [
+    [1, 1],
+    [1, 2],
+  ],
+  [
+    [2, 3],
+    [2, 4],
+  ]
+]
+
+sum(0)
+[
+  [2, 3],
+  [5, 6],
+]
+
+sum(1)
+[
+  [2, 3],
+  [4, 7],
+]
+
+sum(2)
+[
+  [3, 4],
+  [3, 6],
+]
+
+sum(get(0,1)) ...?
+
+```
+
+- Should we just use broadcasting type functions? And we just ignore NULLs
+- No **map** function would be needed then...
+- Should we allow slicing? What about regex match of columns and indices
+
+```
+col, row, group?
+
+zip(
+  get('x', 'y', 'z'),
+  name('a', sum('x', 'y', 'z')),
+  name('b', div('x', 'y')),
+  name('c', avg('x', 'y', 'z')),
+)
+``` 
 
