@@ -52,6 +52,10 @@ These signatures allow for a system capable of expressing any possible transform
 
 FQL is intended to be infinitely extensible making it easy to create any new function matching one of the above signatures
 
+In traditional SQL an agg function (like sum, min, max, avg) could operate over rows, columns, or columns of groups... I think that's it.
+
+Numpy can go arbitarily deep with its grouping/dimensions, but do we want or need this? Even if our model allowed for that level of flexibility it'd likely never be used but for numerical applications, and dealing with axis is kinda confusing for most people
+
 ```
 f(*Collections, *args) -> Collection
 
