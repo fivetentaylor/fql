@@ -87,40 +87,6 @@ f(Record, *args) -> Atom
 get
 ```
 
-```
-[
-  [
-    [1, 1],
-    [1, 2],
-  ],
-  [
-    [2, 3],
-    [2, 4],
-  ]
-]
-
-sum(0)
-[
-  [2, 3],
-  [5, 6],
-]
-
-sum(1)
-[
-  [2, 3],
-  [4, 7],
-]
-
-sum(2)
-[
-  [3, 4],
-  [3, 6],
-]
-
-sum(get(0,1)) ...?
-
-```
-
 - Should we just use broadcasting type functions? And we just ignore NULLs
 - No **map** function would be needed then...
 - Should we allow slicing? What about regex match of columns and indices
@@ -128,11 +94,24 @@ sum(get(0,1)) ...?
 ```
 col, row, group?
 
+x, y, z = get(col, 'x', 'y', 'z')
+
 zip(
-  get('x', 'y', 'z'),
-  name('a', sum('x', 'y', 'z')),
-  name('b', div('x', 'y')),
-  name('c', avg('x', 'y', 'z')),
+  x, y, z,
+  name('a', sum(x, y, z)),
+  name('b', div(x, y)),
+  name('c', avg(x, y, z)),
 )
+
+
+??? (x + y) / z
+sum(row, x, y)
+is div implied since it's always binary?
+
+functions for rows and functions for columns?  I don't like that
+
+g = group(col, 'x')
+
+
 ``` 
 
